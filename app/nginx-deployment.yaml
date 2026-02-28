@@ -25,8 +25,6 @@ spec:
           httpGet:
             path: /
             port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 5
         name: nginx
         ports:
         - containerPort: 80
@@ -35,8 +33,6 @@ spec:
           httpGet:
             path: /
             port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 3
         resources:
           limits:
             cpu: 250m
@@ -44,6 +40,10 @@ spec:
           requests:
             cpu: 100m
             memory: 128Mi
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: nginx-storage
+      volumes:
+      - name: nginx-storage
+        persistentVolumeClaim:
+          claimName: gcp-hostpath-pvc
