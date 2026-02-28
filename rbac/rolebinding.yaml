@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"name":"read-pods-binding","namespace":"dev"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"pod-reader"},"subjects":[{"kind":"ServiceAccount","name":"dev-sa","namespace":"dev"}]}
+  creationTimestamp: "2026-02-27T07:20:42Z"
+  name: read-pods-binding
+  namespace: dev
+  resourceVersion: "16019"
+  uid: a17a2fb0-4721-419a-b781-e3dca27c81ee
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: pod-reader
+subjects:
+- kind: ServiceAccount
+  name: dev-sa
+  namespace: dev
