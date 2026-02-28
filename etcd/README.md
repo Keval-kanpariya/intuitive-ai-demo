@@ -1,6 +1,6 @@
-# 🚀 ETCD Backup & Restore Procedure (Kubernetes Control Plane)
+# ETCD Backup & Restore Procedure (Kubernetes Control Plane)
 
-## 📌 Purpose
+## Purpose
 
 This document explains how to:
 
@@ -11,9 +11,9 @@ This document explains how to:
 
 ---
 
-# 🧯 ETCD Backup Procedure
+# ETCD Backup Procedure
 
-## 🔹 Step 1 — Take etcd Snapshot
+## Step 1 — Take etcd Snapshot
 
 Run on the **control plane node**:
 
@@ -33,7 +33,7 @@ sudo apt install etcd-client -y
 
 ---
 
-## 🔹 Step 2 — Verify Snapshot
+##  Step 2 — Verify Snapshot
 
 Check snapshot file:
 
@@ -57,11 +57,11 @@ Expected output format:
 +----------+----------+------------+------------+
 ```
 
-✅ This confirms the snapshot is valid.
+This confirms the snapshot is valid.
 
 ---
 
-## 🔹 Step 3 — Move Snapshot to Safe Location
+## Step 3 — Move Snapshot to Safe Location
 
 ```bash
 sudo mkdir -p /backup
@@ -74,13 +74,13 @@ Recommended (Production):
 
 ---
 
-# 🔁 ETCD Restore Procedure (Disaster Recovery)
+# ETCD Restore Procedure (Disaster Recovery)
 
-⚠️ Do NOT perform restore on production unless required.
+Do NOT perform restore on production unless required.
 
 ---
 
-## 🔹 Step 1 — Stop kubelet
+## Step 1 — Stop kubelet
 
 ```bash
 sudo systemctl stop kubelet
@@ -88,7 +88,7 @@ sudo systemctl stop kubelet
 
 ---
 
-## 🔹 Step 2 — Backup Existing etcd Data
+## Step 2 — Backup Existing etcd Data
 
 Check current data directory:
 
@@ -110,7 +110,7 @@ sudo mv /var/lib/etcd /var/lib/etcd-backup
 
 ---
 
-## 🔹 Step 3 — Restore Snapshot
+##  Step 3 — Restore Snapshot
 
 ```bash
 sudo ETCDCTL_API=3 etcdctl snapshot restore /backup/snapshot.db \
@@ -122,7 +122,7 @@ sudo ETCDCTL_API=3 etcdctl snapshot restore /backup/snapshot.db \
 
 ---
 
-## 🔹 Step 4 — Verify etcd Manifest
+## Step 4 — Verify etcd Manifest
 
 Open etcd static pod manifest:
 
@@ -140,7 +140,7 @@ Update if necessary.
 
 ---
 
-## 🔹 Step 5 — Start kubelet
+## Step 5 — Start kubelet
 
 ```bash
 sudo systemctl start kubelet
@@ -150,7 +150,7 @@ Kubelet will automatically restart the etcd static pod.
 
 ---
 
-## 🔹 Step 6 — Verify Cluster Recovery
+## Step 6 — Verify Cluster Recovery
 
 ```bash
 kubectl get nodes
@@ -161,7 +161,7 @@ Cluster should return to healthy state.
 
 ---
 
-# 🛡 Best Practices
+# Best Practices
 
 - Schedule regular etcd backups (cron job)
 - Store backups externally (S3/NFS/backup server)
@@ -171,7 +171,7 @@ Cluster should return to healthy state.
 
 ---
 
-# 📌 Summary
+# Summary
 
 | Task | Command |
 |------|----------|
