@@ -19,7 +19,7 @@ The cluster consists of:
 - NGINX application with Ingress  
 - Monitoring stack (Prometheus + Grafana)  
 - RBAC & namespace isolation  
-- etcd snapshot and restore procedure  
+- etcd snapshot and restore procedure (Tested Restore procedure)
 - Bonus production-grade enhancements  
 
 Each folder in this repository contains its own detailed README explaining configuration, reasoning, and validation steps.
@@ -66,4 +66,3 @@ This implementation demonstrates:
 ---
 
 For detailed implementation steps, configuration files, and troubleshooting notes, please refer to the respective folder documentation.
->>>>>>> 4638597 (Add README)
